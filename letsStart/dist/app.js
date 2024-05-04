@@ -11,4 +11,11 @@ app.listen(port, function () {
 app.get('/', function (req, res) {
     res.send({ Cat: app_model_1.Cat });
 });
+app.use(function (req, res, next) {
+    console.log('this is middleware');
+    next();
+});
+app.get('/cats/blue', function (req, res) {
+    res.send({ blue: app_model_1.Cat[0] });
+});
 //# sourceMappingURL=app.js.map

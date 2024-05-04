@@ -8,6 +8,7 @@ import catsRouter from './cats/cats.route';
 // 다른 클래스간의 데이터 공유가 쉬움
 
 class Server {
+  // express app 설정
   public app: express.Application;
 
   constructor() {
@@ -15,11 +16,12 @@ class Server {
     this.app = app;
   }
 
+  // route 분리
   private setRoute() {
-    // route 분리
     this.app.use('/cats', catsRouter);
   }
 
+  // middleWare 설정
   private setMiddleWare() {
     // json middleWare
     this.app.use(express.json());

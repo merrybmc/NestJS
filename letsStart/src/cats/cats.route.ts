@@ -55,4 +55,42 @@ router.post('/', (req, res) => {
   }
 });
 
+// UPDATE PUT
+router.put('/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) throw new Error('cannot find id');
+
+    const body = req.body;
+    let result;
+
+    Cat.forEach((cat) => {
+      if (cat.id === id) {
+        cat = { ...cat, ...body };
+        result = cat;
+      }
+    });
+
+    res.status(200).json({ data: result });
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// DELETE
+router.delete('/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) throw new Error('cannot find id');
+
+    const newCat = Cat.filter((cat) => cat.id !== id);
+
+    res.status(200).json({ data: newCat });
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 export default router;

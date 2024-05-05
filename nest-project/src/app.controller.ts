@@ -20,7 +20,7 @@ export class AppController {
   // express의 app.get()
   // @Get() === route.get("/")
   // @Get("hello") === route.get("/hello")
-  @Get('hello/:id')
+  @Get('/hello/:id')
   getHello(
     @Req() req: Request,
     @Res() res: Response,
@@ -39,5 +39,11 @@ export class AppController {
 
     // 서비스 코드에서 사용할 데이터를 인자로 넘겨주기
     return this.appService.getHello(body, param);
+  }
+
+  // import해온 다른 모듈의 서비스 이용하기
+  @Get('appcat')
+  getHelloCat() {
+    return this.catsService.helloCatServiceProduct();
   }
 }

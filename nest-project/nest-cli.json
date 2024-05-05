@@ -4,5 +4,13 @@
   "sourceRoot": "src",
   "compilerOptions": {
     "deleteOutDir": true
+  },
+  "_comment": "하나의 폴더에 nest 폴더가 2개 이상일 때 build 나누기",
+  "projects": {
+    "production": {
+      "compilerOptions": {
+        "tsConfigPath": "./tsconfig.build.json"
+      }
+    }
   }
 }

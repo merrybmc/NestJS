@@ -1,4 +1,3 @@
-import { updateCat } from './../../../letsStart/src/cats/cats.service';
 import { CatsService } from './cats.service';
 import { Controller, Delete, Get, Patch, Post, Put } from '@nestjs/common';
 

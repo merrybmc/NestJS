@@ -22,4 +22,11 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
   },
+  projects: {
+    production: {
+      compilerOptions: {
+        tsConfigPath: './tsconfig.build.json',
+      },
+    },
+  },
 };

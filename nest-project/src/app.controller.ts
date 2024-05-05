@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Query, Req, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Request, Response } from 'express';
-import { CatsService } from './cats/cats.service';
+import { CatsService } from './entities/cats/cats.service';
 
 // @Controller() 데코레이터
 // express의 router 기능

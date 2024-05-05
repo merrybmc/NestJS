@@ -1,9 +1,9 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CatsModule } from './cats/cats.module';
-import { UsersModule } from './users/users.module';
-import { LoggerMiddleware } from './logger/logger.middleware';
+import { CatsModule } from './entities/cats/cats.module';
+import { UsersModule } from './entities/users/users.module';
+import { LoggerMiddleware } from './common/middleware/logger/logger.middleware';
 
 @Module({
   // 각 모듈이 앱 모듈로 하나로 묶여서 main으로 가게 된다.

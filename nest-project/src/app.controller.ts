@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Query, Req, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Request, Response } from 'express';
+import { CatsService } from './cats/cats.service';
 
 // @Controller() 데코레이터
 // express의 router 기능
@@ -9,7 +10,11 @@ import { Request, Response } from 'express';
 @Controller('cats')
 export class AppController {
   // 서비스 의존성 주입
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    // cats 모듈에서 export를 했기 때문에 App 서비스에서도 Cats 서비스를 사용 가능
+    private readonly catsService: CatsService,
+  ) {}
 
   // @Get()데코레이터
   // express의 app.get()

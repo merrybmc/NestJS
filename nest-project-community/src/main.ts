@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './common/exception/http-exception.filter';
 import { DocumentBuilder, OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
+import * as expressBasicAuth from 'express-basic-auth';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -23,6 +24,17 @@ async function bootstrap() {
   const document: OpenAPIObject = SwaggerModule.createDocument(app, config);
   // parameter 1 = swagger api의 end point 지정 (주소 지정 ex) "docs" - port/docs)
   SwaggerModule.setup('docs', app, document);
+
+  // 해당 경로로 접근 시도시 아이디,비밀번호 입력
+  app.use(
+    ['/docs', '/docs-json', '/test'],
+    expressBasicAuth({
+      challenge: true,
+      users: {
+        [process.env.ADMIN_NAME]: process.env.ADMIN_PASSWORD,
+      },
+    }),
+  );
 
   // CORS 설정
   app.enableCors({

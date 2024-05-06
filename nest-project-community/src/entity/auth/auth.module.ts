@@ -5,15 +5,18 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { CatRepository } from '../cat/cats.repository';
 import { JwtStrategy } from './jwt/jwt.strategy';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    // secret key를 env에서 가져오려면 ConfigModule을 써야함
+    ConfigModule.forRoot(),
     // PassportModule.register - Strategy 기본 설정
     PassportModule.register({ defaultStrategy: 'jwt', session: true }),
 
     // jwt 서비스를 위용하기 위함
     JwtModule.register({
-      secret: 'secretkey',
+      secret: process.env.JWT_SECRET_KEY,
       signOptions: { expiresIn: '1y' }, // 토큰 만료기간 - 1년
     }),
 

@@ -4,12 +4,14 @@ import { AppService } from './app.service';
 import { CatModule } from './entity/cat/cat.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './entity/auth/auth.module';
 import * as mongoose from 'mongoose';
 @Module({
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.MONGODB_URI),
     CatModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

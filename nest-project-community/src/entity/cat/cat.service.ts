@@ -52,4 +52,10 @@ export class CatService {
     // res 반환할 때 보여줄 데이터만 필터링
     return cat.readOnlyData;
   }
+
+  async getAllCat() {
+    const allCat = await this.catsRepository.findAll();
+    const readOnlyCats = allCat.map((cat) => cat.readOnlyData);
+    return readOnlyCats;
+  }
 }

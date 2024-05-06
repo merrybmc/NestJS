@@ -71,4 +71,10 @@ export class CatController {
   uploadCatImg(@UploadedFile() file: Express.Multer.File) {
     return 'uploadImg';
   }
+
+  @ApiOperation({ summary: '모든 유저 정보 가져오기' })
+  @Get('all')
+  getAllCat() {
+    return this.catsService.getAllCat();
+  }
 }

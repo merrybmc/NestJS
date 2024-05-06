@@ -36,7 +36,7 @@ export class CatService {
       password: hash,
     });
 
-    // 보여줄 데이터만 필터링
+    // res 반환할 때 보여줄 데이터만 필터링
     return cat.readOnlyData;
   }
 }

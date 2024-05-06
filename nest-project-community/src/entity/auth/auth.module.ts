@@ -13,7 +13,7 @@ import { JwtStrategy } from './jwt/jwt.strategy';
 
     // jwt 서비스를 위용하기 위함
     JwtModule.register({
-      secret: process.env.JWT_SECRET_KEY,
+      secret: 'secretkey',
       signOptions: { expiresIn: '1y' }, // 토큰 만료기간 - 1년
     }),
 

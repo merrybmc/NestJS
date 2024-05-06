@@ -5,6 +5,7 @@ import {
   Get,
   Post,
   Req,
+  UploadedFile,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
@@ -16,6 +17,7 @@ import { CatResponseDto } from './dto/cat.response.dto';
 import { LoginRequestDto } from '../auth/dto/login.request.dto';
 import { JwtAuthGuard } from '../auth/jwt/jwt.guard';
 import { CurrentUser } from 'src/common/decorator/user.decorator';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('cat')
 export class CatController {
@@ -59,5 +61,14 @@ export class CatController {
   @Post('login')
   login(@Body() data: LoginRequestDto) {
     return this.AuthService.jwtLogIn(data);
+  }
+
+  @ApiOperation({ summary: '이미지 업로드' })
+  // 클라이언트에서 사진을 담아서 보낼 때 key 이름
+  @UseInterceptors(FileInterceptor('file'))
+  @Post('upload')
+  // 여러개 전송 시 @UploadedFiles() files: Array<Express.Multer.File>
+  uploadCatImg(@UploadedFile() file: Express.Multer.File) {
+    return 'uploadImg';
   }
 }

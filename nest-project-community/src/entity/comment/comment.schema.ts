@@ -54,7 +54,5 @@ export const CommentSchema = SchemaFactory.createForClass(Comment);
 CommentSchema.virtual('readOnlyData').get(function (this: Comment) {
   return {
     id: this.id,
-    // email: this.email,
-    // name: this.name,
   };
 });

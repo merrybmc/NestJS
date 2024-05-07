@@ -58,4 +58,14 @@ export class CatService {
     const readOnlyCats = allCat.map((cat) => cat.readOnlyData);
     return readOnlyCats;
   }
+
+  async uploadImg(cat: Cat, file: any) {
+    const fileName = file.key; // 파일 경로/이름
+
+    const newCat = await this.catsRepository.findCatByIdAndUpdateImg(
+      cat.id,
+      fileName,
+    );
+    return newCat;
+  }
 }

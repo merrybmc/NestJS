@@ -18,6 +18,8 @@ import { LoginRequestDto } from '../../auth/dto/login.request.dto';
 import { JwtAuthGuard } from '../../auth/jwt/jwt.guard';
 import { CurrentUser } from 'src/common/decorator/user.decorator';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { AmazonS3FileInterceptor } from 'nestjs-multer-extended';
+import { Cat } from '../cat.schema';
 
 @Controller('cat')
 export class CatController {
@@ -65,11 +67,19 @@ export class CatController {
 
   @ApiOperation({ summary: '이미지 업로드' })
   // 클라이언트에서 사진을 담아서 보낼 때 key 이름
-  @UseInterceptors(FileInterceptor('file'))
+  // @UseInterceptors(FileInterceptor('file'))
+  // AWS S3 이미지 업로드
+  // S3 Nest multer extended는 기본적으로 단일 이미지 업로드 기능만 제공
+  @UseInterceptors(
+    AmazonS3FileInterceptor('image', {
+      dynamicPath: 'name',
+    }),
+  )
+  @UseGuards(JwtAuthGuard)
   @Post('upload')
   // 여러개 전송 시 @UploadedFiles() files: Array<Express.Multer.File>
-  uploadCatImg(@UploadedFile() file: Express.Multer.File) {
-    return 'uploadImg';
+  uploadCatImg(@UploadedFile() file: any, @CurrentUser() cat: Cat) {
+    return this.catsService.uploadImg(cat, file);
   }
 
   @ApiOperation({ summary: '모든 유저 정보 가져오기' })

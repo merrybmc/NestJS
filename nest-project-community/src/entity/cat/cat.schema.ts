@@ -60,6 +60,7 @@ export class Cat extends Document {
 
   // res 반환할 때 보여줄 데이터만 필터링
   readonly readOnlyData: { id: string; email: string; name: string };
+  readonly comment: Comment[];
 }
 
 export const CatSchema = SchemaFactory.createForClass(Cat);
@@ -72,3 +73,11 @@ CatSchema.virtual('readOnlyData').get(function (this: Cat) {
     name: this.name,
   };
 });
+
+CatSchema.virtual('comment', {
+  ref: 'comment',
+  localField: '_id',
+  foreignField: 'info', // 외래 필드 comment schema의 info를 가져옴
+});
+CatSchema.set('toObject', { virtuals: true }); // 객체로 변환 다른 Document와 호환할 때
+CatSchema.set('toJSON', { virtuals: true }); // JSON 형식 변환

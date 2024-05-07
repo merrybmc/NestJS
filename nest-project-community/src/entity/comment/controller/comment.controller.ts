@@ -22,6 +22,6 @@ export class CommentController {
   @ApiOperation({ summary: '좋아요 수' })
   @Post(':id')
   async plusLike(@Param('id') id: string) {
-    return this.commentsService.createComment(id);
+    return this.commentsService.plusLike(id);
   }
 }

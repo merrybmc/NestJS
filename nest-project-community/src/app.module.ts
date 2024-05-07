@@ -5,6 +5,7 @@ import { CatModule } from './entity/cat/cat.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './entity/auth/auth.module';
+import { CommentModule } from './entity/comment/comment.module';
 import * as mongoose from 'mongoose';
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import * as mongoose from 'mongoose';
     MongooseModule.forRoot(process.env.MONGODB_URI),
     CatModule,
     AuthModule,
+    CommentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

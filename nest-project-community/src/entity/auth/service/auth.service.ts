@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { CatRepository } from '../cat/cats.repository';
-import { LoginRequestDto } from './dto/login.request.dto';
+import { CatRepository } from '../../cat/cats.repository';
+import { LoginRequestDto } from '../dto/login.request.dto';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 

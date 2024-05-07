@@ -1,6 +1,6 @@
 import { CatModule } from './../cat/cat.module';
 import { forwardRef, Module } from '@nestjs/common';
-import { AuthService } from './auth.service';
+import { AuthService } from './service/auth.service';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { CatRepository } from '../cat/cats.repository';
